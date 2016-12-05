@@ -23,3 +23,7 @@ See `dist/index.html` for an example.
 # Elm Reactor
 
 You can also run `elm-reactor` in the project root, and visit [http://localhost:8000/src/Calculator.elm](http://localhost:8000/src/Calculator.elm)
+
+# Tests
+
+There are some basic tests in the `tests` folder you can run with `elm test`.  To install elm test run `npm install -g elm-test`.

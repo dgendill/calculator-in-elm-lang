@@ -14,6 +14,7 @@ import Array
 import Css as C exposing (pct, px, rgb, rgba, Mixin, width)
 import InfixPolishConversion
 
+
 {-| Render the component -}
 main : Program Never Model Msg
 main =
@@ -23,22 +24,26 @@ main =
     , update = update
     }
 
+
 {-| The Model is a list of symbols -}
-type alias Model = {
-  expr : List ExpressionSymbol
-}
+type alias Model =
+  { expr : List ExpressionSymbol }
+
 
 model : Model
 model = { expr = [] }
 
+
 {-| An Expression is a list of symbols. -}
 type alias Expression = List ExpressionSymbol
+
 
 {-| We support the following symbols currently.  N is for numeric symbols. -}
 type ExpressionSymbol
   = Addition
   | Subtraction
   | N String
+
 
 {-| These are the events that a user can trigger by interacting with the DOM -}
 type Msg
@@ -47,6 +52,7 @@ type Msg
   | Num Float
   | Clear
   | Evaluate
+
 
 {-| This is evaluated with native String.eval -}
 evalExpression : Expression -> Expression
@@ -57,35 +63,36 @@ evalExpression exprList =
       0 -> []
       _ -> [N (toString v)]
 
+
 {-| Update the view... -}
 update : Msg -> Model -> Model
 update msg model =
-    case msg of
-      Num 0.0 ->
-        if (List.length model.expr == 0)
-        then model
-        else { expr = (::) (N "0") model.expr }
+  case msg of
+    Num 0.0 ->
+      if (List.length model.expr == 0)
+      then model
+      else { expr = (::) (N "0") model.expr }
 
-      Num a ->
-        { expr = (::) (N (toString a)) model.expr }
+    Num a ->
+      { expr = (::) (N (toString a)) model.expr }
 
-      Add ->
-        case (List.head model.expr) of
-          Just (N b) -> { expr =  Addition ::  model.expr }
-          Just (b)   -> model
-          Nothing    -> model
+    Add ->
+      case (List.head model.expr) of
+        Just (N b) -> { expr =  Addition ::  model.expr }
+        Just (b)   -> model
+        Nothing    -> model
 
-      Subtract ->
-        case (List.head model.expr) of
-          Just (N b) -> { expr =  Subtraction :: model.expr }
-          Just (b)   -> model
-          Nothing    -> model
+    Subtract ->
+      case (List.head model.expr) of
+        Just (N b) -> { expr =  Subtraction :: model.expr }
+        Just (b)   -> model
+        Nothing    -> model
 
-      Clear ->
-        { expr = [] }
+    Clear ->
+      { expr = [] }
 
-      Evaluate ->
-        { expr = evalExpression model.expr }
+    Evaluate ->
+      { expr = evalExpression model.expr }
 
 
 {-| Render the expression in reverse polish notation. -}
@@ -93,6 +100,7 @@ showExpressionPolish : Expression -> String
 showExpressionPolish expr =
   InfixPolishConversion.infixToPolishString " "
   (List.map String.fromChar (String.toList (showExpression expr)))
+
 
 {-| Render the expression with infix notation. -}
 showExpression : Expression -> String
@@ -107,14 +115,20 @@ showExpression expr =
         N a -> acc ++ a
     ) "" expr)
 
+
 styles =
   C.asPairs >> Html.Attributes.style
 
+
 calcBorder : Mixin
-calcBorder = C.border3 (px 1) C.solid (rgb 220 220 220)
+calcBorder =
+  C.border3 (px 1) C.solid (rgb 220 220 220)
+
 
 viewportBackground : C.Color
-viewportBackground = (rgb 240 240 240)
+viewportBackground =
+  (rgb 240 240 240)
+
 
 calcButton : List (Html.Attribute msg) -> List (Html msg) -> Html msg
 calcButton attr html =
@@ -124,6 +138,7 @@ calcButton attr html =
     [styles [ width (pct 32)
             , C.marginBottom (px 10) ]])
   html
+
 
 view : Model -> Html Msg
 view model =
