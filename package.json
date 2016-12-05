@@ -1,0 +1,13 @@
+{
+  "name": "calculator-in-elm-lang",
+  "version": "1.0.0",
+  "description": "A calulator written in elm",
+  "main": "calculator.js",
+  "repository": "https://github.com/dgendill/calculator-in-elm-lang",
+  "scripts": {
+    "build": "elm-make src/Calculator.elm --output=dist/calculator.js"
+  },
+  "private":true,
+  "author": "Dominick Gendill",
+  "license": "MIT"
+}
