@@ -22,4 +22,4 @@ See `dist/index.html` for an example.
 
 # Elm Reactor
 
-You can also run `elm-reactor` in the project root, and visit http://localhost:8000/src/Calculator.elm
+You can also run `elm-reactor` in the project root, and visit [http://localhost:8000/src/Calculator.elm](http://localhost:8000/src/Calculator.elm)
