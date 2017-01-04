@@ -7,6 +7,7 @@ This is a basic calculator component build with elm.  See the demo in [dist/inde
 - Version 2
   1. No longer using String.eval.  Built a property postfix expression parser.
   2. Added multiplication and division.
+  3. Bug fix so you can enter multidigit numbers.
 
 - Version 1
   1. The calculator works
