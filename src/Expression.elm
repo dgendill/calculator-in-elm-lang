@@ -1,19 +1,17 @@
-module Expression exposing (..)
--- exposing
---   ( infixToPostfix
---   , Symbol(..)
---   , Expression
---   , eval
---   , basicEval
---   , showExpr
---   , mergeNumbers
---   , evalInfix
---   )
+module Expression exposing
+  ( infixToPostfix
+  , Symbol(..)
+  , Expression
+  , eval
+  , basicEval
+  , showExpr
+  , mergeNumbers
+  , evalInfix
+  )
 
 {-| Provides a way to evaluate a list of arithmetic symbols into a final value.
 # Definition
-@docs infixToPostfix, Symbol, Expression, eval, basicEval, showExpr, mergeNumbers, ConversionStep, NewExpression, OldExpression, OpStack, compareOps, compareSy, eval_, getAt_, head_, infixToPostfix_, isOperand, isOperator, liftMaybes, popStack, tail_, testExp, evalInfix
-
+@docs infixToPostfix,Symbol,Expression,eval, basicEval, showExpr, mergeNumbers, evalInfix
 -}
 
 import List exposing(foldr, indexedMap, append, tail, head, reverse, length, drop)
