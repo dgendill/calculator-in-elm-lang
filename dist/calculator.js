@@ -8256,15 +8256,6 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _dgendill$calculator_in_elm_lang$Native_StringEval = function() {
-return {
-    // I am a sinner, forgive me
-    'eval': function(a) { return eval(a); }
-}
-}();
-
-var _dgendill$calculator_in_elm_lang$StringEval$eval = _dgendill$calculator_in_elm_lang$Native_StringEval.eval;
-
 //import Maybe, Native.List //
 
 var _elm_lang$core$Native_Regex = function() {
@@ -12783,128 +12774,1746 @@ var _rtfeldman$elm_css$Css$thin = _rtfeldman$elm_css$Css$IntentionallyUnsupporte
 var _rtfeldman$elm_css$Css$thick = _rtfeldman$elm_css$Css$IntentionallyUnsupportedPleaseSeeDocs;
 var _rtfeldman$elm_css$Css$blink = _rtfeldman$elm_css$Css$IntentionallyUnsupportedPleaseSeeDocs;
 
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$isSymbol = function (s) {
-	return A2(
-		_elm_lang$core$List$member,
-		s,
-		{
-			ctor: '::',
-			_0: '+',
-			_1: {
-				ctor: '::',
-				_0: '-',
-				_1: {
-					ctor: '::',
-					_0: '*',
-					_1: {
-						ctor: '::',
-						_0: '/',
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
+var _elm_lang$core$Set$foldr = F3(
+	function (f, b, _p0) {
+		var _p1 = _p0;
+		return A3(
+			_elm_lang$core$Dict$foldr,
+			F3(
+				function (k, _p2, b) {
+					return A2(f, k, b);
+				}),
+			b,
+			_p1._0);
+	});
+var _elm_lang$core$Set$foldl = F3(
+	function (f, b, _p3) {
+		var _p4 = _p3;
+		return A3(
+			_elm_lang$core$Dict$foldl,
+			F3(
+				function (k, _p5, b) {
+					return A2(f, k, b);
+				}),
+			b,
+			_p4._0);
+	});
+var _elm_lang$core$Set$toList = function (_p6) {
+	var _p7 = _p6;
+	return _elm_lang$core$Dict$keys(_p7._0);
 };
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$pushOp = F2(
-	function (s, acc) {
+var _elm_lang$core$Set$size = function (_p8) {
+	var _p9 = _p8;
+	return _elm_lang$core$Dict$size(_p9._0);
+};
+var _elm_lang$core$Set$member = F2(
+	function (k, _p10) {
+		var _p11 = _p10;
+		return A2(_elm_lang$core$Dict$member, k, _p11._0);
+	});
+var _elm_lang$core$Set$isEmpty = function (_p12) {
+	var _p13 = _p12;
+	return _elm_lang$core$Dict$isEmpty(_p13._0);
+};
+var _elm_lang$core$Set$Set_elm_builtin = function (a) {
+	return {ctor: 'Set_elm_builtin', _0: a};
+};
+var _elm_lang$core$Set$empty = _elm_lang$core$Set$Set_elm_builtin(_elm_lang$core$Dict$empty);
+var _elm_lang$core$Set$singleton = function (k) {
+	return _elm_lang$core$Set$Set_elm_builtin(
+		A2(
+			_elm_lang$core$Dict$singleton,
+			k,
+			{ctor: '_Tuple0'}));
+};
+var _elm_lang$core$Set$insert = F2(
+	function (k, _p14) {
+		var _p15 = _p14;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A3(
+				_elm_lang$core$Dict$insert,
+				k,
+				{ctor: '_Tuple0'},
+				_p15._0));
+	});
+var _elm_lang$core$Set$fromList = function (xs) {
+	return A3(_elm_lang$core$List$foldl, _elm_lang$core$Set$insert, _elm_lang$core$Set$empty, xs);
+};
+var _elm_lang$core$Set$map = F2(
+	function (f, s) {
+		return _elm_lang$core$Set$fromList(
+			A2(
+				_elm_lang$core$List$map,
+				f,
+				_elm_lang$core$Set$toList(s)));
+	});
+var _elm_lang$core$Set$remove = F2(
+	function (k, _p16) {
+		var _p17 = _p16;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(_elm_lang$core$Dict$remove, k, _p17._0));
+	});
+var _elm_lang$core$Set$union = F2(
+	function (_p19, _p18) {
+		var _p20 = _p19;
+		var _p21 = _p18;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(_elm_lang$core$Dict$union, _p20._0, _p21._0));
+	});
+var _elm_lang$core$Set$intersect = F2(
+	function (_p23, _p22) {
+		var _p24 = _p23;
+		var _p25 = _p22;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(_elm_lang$core$Dict$intersect, _p24._0, _p25._0));
+	});
+var _elm_lang$core$Set$diff = F2(
+	function (_p27, _p26) {
+		var _p28 = _p27;
+		var _p29 = _p26;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(_elm_lang$core$Dict$diff, _p28._0, _p29._0));
+	});
+var _elm_lang$core$Set$filter = F2(
+	function (p, _p30) {
+		var _p31 = _p30;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(
+				_elm_lang$core$Dict$filter,
+				F2(
+					function (k, _p32) {
+						return p(k);
+					}),
+				_p31._0));
+	});
+var _elm_lang$core$Set$partition = F2(
+	function (p, _p33) {
+		var _p34 = _p33;
+		var _p35 = A2(
+			_elm_lang$core$Dict$partition,
+			F2(
+				function (k, _p36) {
+					return p(k);
+				}),
+			_p34._0);
+		var p1 = _p35._0;
+		var p2 = _p35._1;
 		return {
-			output: acc.output,
-			ops: A2(
-				_elm_lang$core$List$append,
-				acc.ops,
-				{
-					ctor: '::',
-					_0: s,
-					_1: {ctor: '[]'}
-				})
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Set$Set_elm_builtin(p1),
+			_1: _elm_lang$core$Set$Set_elm_builtin(p2)
 		};
 	});
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$popOp = function (s) {
-	return {
-		output: s.output,
-		ops: _elm_lang$core$Array$toList(
-			A3(
-				_elm_lang$core$Array$slice,
-				0,
-				_elm_lang$core$List$length(s.ops) - 1,
-				_elm_lang$core$Array$fromList(s.ops)))
-	};
-};
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$listPop = function (l) {
-	return _elm_lang$core$List$head(
-		_elm_lang$core$List$reverse(l));
-};
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$emptyNewState = {
-	output: {ctor: '[]'},
-	ops: {ctor: '[]'}
-};
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$newState = F2(
-	function (output, ops) {
-		return {output: output, ops: ops};
+
+var _elm_community$list_extra$List_Extra$greedyGroupsOfWithStep = F3(
+	function (size, step, xs) {
+		var okayXs = _elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(xs),
+			0) > 0;
+		var okayArgs = (_elm_lang$core$Native_Utils.cmp(size, 0) > 0) && (_elm_lang$core$Native_Utils.cmp(step, 0) > 0);
+		var xs_ = A2(_elm_lang$core$List$drop, step, xs);
+		var group = A2(_elm_lang$core$List$take, size, xs);
+		return (okayArgs && okayXs) ? {
+			ctor: '::',
+			_0: group,
+			_1: A3(_elm_community$list_extra$List_Extra$greedyGroupsOfWithStep, size, step, xs_)
+		} : {ctor: '[]'};
 	});
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$pushOutput = F2(
-	function (v, acc) {
-		return A2(
-			_dgendill$calculator_in_elm_lang$InfixPolishConversion$newState,
-			A2(
-				_elm_lang$core$List$append,
-				acc.output,
-				{
-					ctor: '::',
-					_0: v,
-					_1: {ctor: '[]'}
-				}),
-			acc.ops);
+var _elm_community$list_extra$List_Extra$greedyGroupsOf = F2(
+	function (size, xs) {
+		return A3(_elm_community$list_extra$List_Extra$greedyGroupsOfWithStep, size, size, xs);
 	});
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$processOps = F2(
-	function (v, acc) {
-		processOps:
-		while (true) {
-			var _p0 = _dgendill$calculator_in_elm_lang$InfixPolishConversion$listPop(acc.ops);
-			if (_p0.ctor === 'Just') {
-				var _v1 = v,
-					_v2 = A2(
-					_dgendill$calculator_in_elm_lang$InfixPolishConversion$pushOutput,
-					_p0._0,
-					_dgendill$calculator_in_elm_lang$InfixPolishConversion$popOp(acc));
-				v = _v1;
-				acc = _v2;
-				continue processOps;
+var _elm_community$list_extra$List_Extra$groupsOfWithStep = F3(
+	function (size, step, xs) {
+		var okayArgs = (_elm_lang$core$Native_Utils.cmp(size, 0) > 0) && (_elm_lang$core$Native_Utils.cmp(step, 0) > 0);
+		var xs_ = A2(_elm_lang$core$List$drop, step, xs);
+		var group = A2(_elm_lang$core$List$take, size, xs);
+		var okayLength = _elm_lang$core$Native_Utils.eq(
+			size,
+			_elm_lang$core$List$length(group));
+		return (okayArgs && okayLength) ? {
+			ctor: '::',
+			_0: group,
+			_1: A3(_elm_community$list_extra$List_Extra$groupsOfWithStep, size, step, xs_)
+		} : {ctor: '[]'};
+	});
+var _elm_community$list_extra$List_Extra$groupsOf = F2(
+	function (size, xs) {
+		return A3(_elm_community$list_extra$List_Extra$groupsOfWithStep, size, size, xs);
+	});
+var _elm_community$list_extra$List_Extra$zip5 = _elm_lang$core$List$map5(
+	F5(
+		function (v0, v1, v2, v3, v4) {
+			return {ctor: '_Tuple5', _0: v0, _1: v1, _2: v2, _3: v3, _4: v4};
+		}));
+var _elm_community$list_extra$List_Extra$zip4 = _elm_lang$core$List$map4(
+	F4(
+		function (v0, v1, v2, v3) {
+			return {ctor: '_Tuple4', _0: v0, _1: v1, _2: v2, _3: v3};
+		}));
+var _elm_community$list_extra$List_Extra$zip3 = _elm_lang$core$List$map3(
+	F3(
+		function (v0, v1, v2) {
+			return {ctor: '_Tuple3', _0: v0, _1: v1, _2: v2};
+		}));
+var _elm_community$list_extra$List_Extra$zip = _elm_lang$core$List$map2(
+	F2(
+		function (v0, v1) {
+			return {ctor: '_Tuple2', _0: v0, _1: v1};
+		}));
+var _elm_community$list_extra$List_Extra$isPrefixOf = F2(
+	function (prefix, xs) {
+		var _p0 = {ctor: '_Tuple2', _0: prefix, _1: xs};
+		if (_p0._0.ctor === '[]') {
+			return true;
+		} else {
+			if (_p0._1.ctor === '[]') {
+				return false;
 			} else {
-				return A2(_dgendill$calculator_in_elm_lang$InfixPolishConversion$pushOp, v, acc);
+				return _elm_lang$core$Native_Utils.eq(_p0._0._0, _p0._1._0) && A2(_elm_community$list_extra$List_Extra$isPrefixOf, _p0._0._1, _p0._1._1);
 			}
 		}
 	});
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$processSymbol = F2(
-	function (v, acc) {
-		return _dgendill$calculator_in_elm_lang$InfixPolishConversion$isSymbol(v) ? A2(_dgendill$calculator_in_elm_lang$InfixPolishConversion$processOps, v, acc) : A2(_dgendill$calculator_in_elm_lang$InfixPolishConversion$pushOutput, v, acc);
-	});
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$infixToPolishState = function (l) {
-	return A3(_elm_lang$core$List$foldl, _dgendill$calculator_in_elm_lang$InfixPolishConversion$processSymbol, _dgendill$calculator_in_elm_lang$InfixPolishConversion$emptyNewState, l);
-};
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$infixToPolish = function (l) {
-	var r = _dgendill$calculator_in_elm_lang$InfixPolishConversion$infixToPolishState(l);
-	return A2(_elm_lang$core$List$append, r.output, r.ops);
-};
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$infixToPolishString = F2(
-	function (seperator, l) {
-		var r = _dgendill$calculator_in_elm_lang$InfixPolishConversion$infixToPolishState(l);
+var _elm_community$list_extra$List_Extra$isSuffixOf = F2(
+	function (suffix, xs) {
 		return A2(
-			_elm_lang$core$String$join,
-			seperator,
-			A2(_elm_lang$core$List$append, r.output, r.ops));
+			_elm_community$list_extra$List_Extra$isPrefixOf,
+			_elm_lang$core$List$reverse(suffix),
+			_elm_lang$core$List$reverse(xs));
 	});
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$tests = _elm_lang$html$Html$text(
-	_elm_lang$core$Basics$toString(
-		_dgendill$calculator_in_elm_lang$InfixPolishConversion$infixToPolish(
-			A2(
+var _elm_community$list_extra$List_Extra$selectSplit = function (xs) {
+	var _p1 = xs;
+	if (_p1.ctor === '[]') {
+		return {ctor: '[]'};
+	} else {
+		var _p5 = _p1._1;
+		var _p4 = _p1._0;
+		return {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple3',
+				_0: {ctor: '[]'},
+				_1: _p4,
+				_2: _p5
+			},
+			_1: A2(
 				_elm_lang$core$List$map,
-				_elm_lang$core$String$fromChar,
-				_elm_lang$core$String$toList('3-4+5')))));
-var _dgendill$calculator_in_elm_lang$InfixPolishConversion$State = F2(
-	function (a, b) {
-		return {output: a, ops: b};
+				function (_p2) {
+					var _p3 = _p2;
+					return {
+						ctor: '_Tuple3',
+						_0: {ctor: '::', _0: _p4, _1: _p3._0},
+						_1: _p3._1,
+						_2: _p3._2
+					};
+				},
+				_elm_community$list_extra$List_Extra$selectSplit(_p5))
+		};
+	}
+};
+var _elm_community$list_extra$List_Extra$select = function (xs) {
+	var _p6 = xs;
+	if (_p6.ctor === '[]') {
+		return {ctor: '[]'};
+	} else {
+		var _p10 = _p6._1;
+		var _p9 = _p6._0;
+		return {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: _p9, _1: _p10},
+			_1: A2(
+				_elm_lang$core$List$map,
+				function (_p7) {
+					var _p8 = _p7;
+					return {
+						ctor: '_Tuple2',
+						_0: _p8._0,
+						_1: {ctor: '::', _0: _p9, _1: _p8._1}
+					};
+				},
+				_elm_community$list_extra$List_Extra$select(_p10))
+		};
+	}
+};
+var _elm_community$list_extra$List_Extra$tailsHelp = F2(
+	function (e, list) {
+		var _p11 = list;
+		if (_p11.ctor === '::') {
+			var _p12 = _p11._0;
+			return {
+				ctor: '::',
+				_0: {ctor: '::', _0: e, _1: _p12},
+				_1: {ctor: '::', _0: _p12, _1: _p11._1}
+			};
+		} else {
+			return {ctor: '[]'};
+		}
 	});
+var _elm_community$list_extra$List_Extra$tails = A2(
+	_elm_lang$core$List$foldr,
+	_elm_community$list_extra$List_Extra$tailsHelp,
+	{
+		ctor: '::',
+		_0: {ctor: '[]'},
+		_1: {ctor: '[]'}
+	});
+var _elm_community$list_extra$List_Extra$isInfixOf = F2(
+	function (infix, xs) {
+		return A2(
+			_elm_lang$core$List$any,
+			_elm_community$list_extra$List_Extra$isPrefixOf(infix),
+			_elm_community$list_extra$List_Extra$tails(xs));
+	});
+var _elm_community$list_extra$List_Extra$inits = A2(
+	_elm_lang$core$List$foldr,
+	F2(
+		function (e, acc) {
+			return {
+				ctor: '::',
+				_0: {ctor: '[]'},
+				_1: A2(
+					_elm_lang$core$List$map,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						})(e),
+					acc)
+			};
+		}),
+	{
+		ctor: '::',
+		_0: {ctor: '[]'},
+		_1: {ctor: '[]'}
+	});
+var _elm_community$list_extra$List_Extra$groupWhileTransitively = F2(
+	function (cmp, xs_) {
+		var _p13 = xs_;
+		if (_p13.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			if (_p13._1.ctor === '[]') {
+				return {
+					ctor: '::',
+					_0: {
+						ctor: '::',
+						_0: _p13._0,
+						_1: {ctor: '[]'}
+					},
+					_1: {ctor: '[]'}
+				};
+			} else {
+				var _p15 = _p13._0;
+				var _p14 = A2(_elm_community$list_extra$List_Extra$groupWhileTransitively, cmp, _p13._1);
+				if (_p14.ctor === '::') {
+					return A2(cmp, _p15, _p13._1._0) ? {
+						ctor: '::',
+						_0: {ctor: '::', _0: _p15, _1: _p14._0},
+						_1: _p14._1
+					} : {
+						ctor: '::',
+						_0: {
+							ctor: '::',
+							_0: _p15,
+							_1: {ctor: '[]'}
+						},
+						_1: _p14
+					};
+				} else {
+					return {ctor: '[]'};
+				}
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$stripPrefix = F2(
+	function (prefix, xs) {
+		var step = F2(
+			function (e, m) {
+				var _p16 = m;
+				if (_p16.ctor === 'Nothing') {
+					return _elm_lang$core$Maybe$Nothing;
+				} else {
+					if (_p16._0.ctor === '[]') {
+						return _elm_lang$core$Maybe$Nothing;
+					} else {
+						return _elm_lang$core$Native_Utils.eq(e, _p16._0._0) ? _elm_lang$core$Maybe$Just(_p16._0._1) : _elm_lang$core$Maybe$Nothing;
+					}
+				}
+			});
+		return A3(
+			_elm_lang$core$List$foldl,
+			step,
+			_elm_lang$core$Maybe$Just(xs),
+			prefix);
+	});
+var _elm_community$list_extra$List_Extra$dropWhileRight = function (p) {
+	return A2(
+		_elm_lang$core$List$foldr,
+		F2(
+			function (x, xs) {
+				return (p(x) && _elm_lang$core$List$isEmpty(xs)) ? {ctor: '[]'} : {ctor: '::', _0: x, _1: xs};
+			}),
+		{ctor: '[]'});
+};
+var _elm_community$list_extra$List_Extra$takeWhileRight = function (p) {
+	var step = F2(
+		function (x, _p17) {
+			var _p18 = _p17;
+			var _p19 = _p18._0;
+			return (p(x) && _p18._1) ? {
+				ctor: '_Tuple2',
+				_0: {ctor: '::', _0: x, _1: _p19},
+				_1: true
+			} : {ctor: '_Tuple2', _0: _p19, _1: false};
+		});
+	return function (_p20) {
+		return _elm_lang$core$Tuple$first(
+			A3(
+				_elm_lang$core$List$foldr,
+				step,
+				{
+					ctor: '_Tuple2',
+					_0: {ctor: '[]'},
+					_1: true
+				},
+				_p20));
+	};
+};
+var _elm_community$list_extra$List_Extra$splitAt = F2(
+	function (n, xs) {
+		return {
+			ctor: '_Tuple2',
+			_0: A2(_elm_lang$core$List$take, n, xs),
+			_1: A2(_elm_lang$core$List$drop, n, xs)
+		};
+	});
+var _elm_community$list_extra$List_Extra$groupsOfVarying_ = F3(
+	function (listOflengths, list, accu) {
+		groupsOfVarying_:
+		while (true) {
+			var _p21 = {ctor: '_Tuple2', _0: listOflengths, _1: list};
+			if (((_p21.ctor === '_Tuple2') && (_p21._0.ctor === '::')) && (_p21._1.ctor === '::')) {
+				var _p22 = A2(_elm_community$list_extra$List_Extra$splitAt, _p21._0._0, list);
+				var head = _p22._0;
+				var tail = _p22._1;
+				var _v11 = _p21._0._1,
+					_v12 = tail,
+					_v13 = {ctor: '::', _0: head, _1: accu};
+				listOflengths = _v11;
+				list = _v12;
+				accu = _v13;
+				continue groupsOfVarying_;
+			} else {
+				return _elm_lang$core$List$reverse(accu);
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$groupsOfVarying = F2(
+	function (listOflengths, list) {
+		return A3(
+			_elm_community$list_extra$List_Extra$groupsOfVarying_,
+			listOflengths,
+			list,
+			{ctor: '[]'});
+	});
+var _elm_community$list_extra$List_Extra$unfoldr = F2(
+	function (f, seed) {
+		var _p23 = f(seed);
+		if (_p23.ctor === 'Nothing') {
+			return {ctor: '[]'};
+		} else {
+			return {
+				ctor: '::',
+				_0: _p23._0._0,
+				_1: A2(_elm_community$list_extra$List_Extra$unfoldr, f, _p23._0._1)
+			};
+		}
+	});
+var _elm_community$list_extra$List_Extra$scanr1 = F2(
+	function (f, xs_) {
+		var _p24 = xs_;
+		if (_p24.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			if (_p24._1.ctor === '[]') {
+				return {
+					ctor: '::',
+					_0: _p24._0,
+					_1: {ctor: '[]'}
+				};
+			} else {
+				var _p25 = A2(_elm_community$list_extra$List_Extra$scanr1, f, _p24._1);
+				if (_p25.ctor === '::') {
+					return {
+						ctor: '::',
+						_0: A2(f, _p24._0, _p25._0),
+						_1: _p25
+					};
+				} else {
+					return {ctor: '[]'};
+				}
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$scanr = F3(
+	function (f, acc, xs_) {
+		var _p26 = xs_;
+		if (_p26.ctor === '[]') {
+			return {
+				ctor: '::',
+				_0: acc,
+				_1: {ctor: '[]'}
+			};
+		} else {
+			var _p27 = A3(_elm_community$list_extra$List_Extra$scanr, f, acc, _p26._1);
+			if (_p27.ctor === '::') {
+				return {
+					ctor: '::',
+					_0: A2(f, _p26._0, _p27._0),
+					_1: _p27
+				};
+			} else {
+				return {ctor: '[]'};
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$scanl1 = F2(
+	function (f, xs_) {
+		var _p28 = xs_;
+		if (_p28.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			return A3(_elm_lang$core$List$scanl, f, _p28._0, _p28._1);
+		}
+	});
+var _elm_community$list_extra$List_Extra$indexedFoldr = F3(
+	function (func, acc, list) {
+		var step = F2(
+			function (x, _p29) {
+				var _p30 = _p29;
+				var _p31 = _p30._0;
+				return {
+					ctor: '_Tuple2',
+					_0: _p31 - 1,
+					_1: A3(func, _p31, x, _p30._1)
+				};
+			});
+		return _elm_lang$core$Tuple$second(
+			A3(
+				_elm_lang$core$List$foldr,
+				step,
+				{
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$List$length(list) - 1,
+					_1: acc
+				},
+				list));
+	});
+var _elm_community$list_extra$List_Extra$indexedFoldl = F3(
+	function (func, acc, list) {
+		var step = F2(
+			function (x, _p32) {
+				var _p33 = _p32;
+				var _p34 = _p33._0;
+				return {
+					ctor: '_Tuple2',
+					_0: _p34 + 1,
+					_1: A3(func, _p34, x, _p33._1)
+				};
+			});
+		return _elm_lang$core$Tuple$second(
+			A3(
+				_elm_lang$core$List$foldl,
+				step,
+				{ctor: '_Tuple2', _0: 0, _1: acc},
+				list));
+	});
+var _elm_community$list_extra$List_Extra$foldr1 = F2(
+	function (f, xs) {
+		var mf = F2(
+			function (x, m) {
+				return _elm_lang$core$Maybe$Just(
+					function () {
+						var _p35 = m;
+						if (_p35.ctor === 'Nothing') {
+							return x;
+						} else {
+							return A2(f, x, _p35._0);
+						}
+					}());
+			});
+		return A3(_elm_lang$core$List$foldr, mf, _elm_lang$core$Maybe$Nothing, xs);
+	});
+var _elm_community$list_extra$List_Extra$foldl1 = F2(
+	function (f, xs) {
+		var mf = F2(
+			function (x, m) {
+				return _elm_lang$core$Maybe$Just(
+					function () {
+						var _p36 = m;
+						if (_p36.ctor === 'Nothing') {
+							return x;
+						} else {
+							return A2(f, _p36._0, x);
+						}
+					}());
+			});
+		return A3(_elm_lang$core$List$foldl, mf, _elm_lang$core$Maybe$Nothing, xs);
+	});
+var _elm_community$list_extra$List_Extra$interweaveHelp = F3(
+	function (l1, l2, acc) {
+		interweaveHelp:
+		while (true) {
+			var _p37 = {ctor: '_Tuple2', _0: l1, _1: l2};
+			_v24_1:
+			do {
+				if (_p37._0.ctor === '::') {
+					if (_p37._1.ctor === '::') {
+						var _v25 = _p37._0._1,
+							_v26 = _p37._1._1,
+							_v27 = A2(
+							_elm_lang$core$Basics_ops['++'],
+							acc,
+							{
+								ctor: '::',
+								_0: _p37._0._0,
+								_1: {
+									ctor: '::',
+									_0: _p37._1._0,
+									_1: {ctor: '[]'}
+								}
+							});
+						l1 = _v25;
+						l2 = _v26;
+						acc = _v27;
+						continue interweaveHelp;
+					} else {
+						break _v24_1;
+					}
+				} else {
+					if (_p37._1.ctor === '[]') {
+						break _v24_1;
+					} else {
+						return A2(_elm_lang$core$Basics_ops['++'], acc, _p37._1);
+					}
+				}
+			} while(false);
+			return A2(_elm_lang$core$Basics_ops['++'], acc, _p37._0);
+		}
+	});
+var _elm_community$list_extra$List_Extra$interweave = F2(
+	function (l1, l2) {
+		return A3(
+			_elm_community$list_extra$List_Extra$interweaveHelp,
+			l1,
+			l2,
+			{ctor: '[]'});
+	});
+var _elm_community$list_extra$List_Extra$permutations = function (xs_) {
+	var _p38 = xs_;
+	if (_p38.ctor === '[]') {
+		return {
+			ctor: '::',
+			_0: {ctor: '[]'},
+			_1: {ctor: '[]'}
+		};
+	} else {
+		var f = function (_p39) {
+			var _p40 = _p39;
+			return A2(
+				_elm_lang$core$List$map,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(_p40._0),
+				_elm_community$list_extra$List_Extra$permutations(_p40._1));
+		};
+		return A2(
+			_elm_lang$core$List$concatMap,
+			f,
+			_elm_community$list_extra$List_Extra$select(_p38));
+	}
+};
+var _elm_community$list_extra$List_Extra$isPermutationOf = F2(
+	function (permut, xs) {
+		return A2(
+			_elm_lang$core$List$member,
+			permut,
+			_elm_community$list_extra$List_Extra$permutations(xs));
+	});
+var _elm_community$list_extra$List_Extra$subsequencesNonEmpty = function (xs) {
+	var _p41 = xs;
+	if (_p41.ctor === '[]') {
+		return {ctor: '[]'};
+	} else {
+		var _p42 = _p41._0;
+		var f = F2(
+			function (ys, r) {
+				return {
+					ctor: '::',
+					_0: ys,
+					_1: {
+						ctor: '::',
+						_0: {ctor: '::', _0: _p42, _1: ys},
+						_1: r
+					}
+				};
+			});
+		return {
+			ctor: '::',
+			_0: {
+				ctor: '::',
+				_0: _p42,
+				_1: {ctor: '[]'}
+			},
+			_1: A3(
+				_elm_lang$core$List$foldr,
+				f,
+				{ctor: '[]'},
+				_elm_community$list_extra$List_Extra$subsequencesNonEmpty(_p41._1))
+		};
+	}
+};
+var _elm_community$list_extra$List_Extra$subsequences = function (xs) {
+	return {
+		ctor: '::',
+		_0: {ctor: '[]'},
+		_1: _elm_community$list_extra$List_Extra$subsequencesNonEmpty(xs)
+	};
+};
+var _elm_community$list_extra$List_Extra$isSubsequenceOf = F2(
+	function (subseq, xs) {
+		return A2(
+			_elm_lang$core$List$member,
+			subseq,
+			_elm_community$list_extra$List_Extra$subsequences(xs));
+	});
+var _elm_community$list_extra$List_Extra$transpose = function (ll) {
+	transpose:
+	while (true) {
+		var _p43 = ll;
+		if (_p43.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			if (_p43._0.ctor === '[]') {
+				var _v32 = _p43._1;
+				ll = _v32;
+				continue transpose;
+			} else {
+				var _p44 = _p43._1;
+				var tails = A2(_elm_lang$core$List$filterMap, _elm_lang$core$List$tail, _p44);
+				var heads = A2(_elm_lang$core$List$filterMap, _elm_lang$core$List$head, _p44);
+				return {
+					ctor: '::',
+					_0: {ctor: '::', _0: _p43._0._0, _1: heads},
+					_1: _elm_community$list_extra$List_Extra$transpose(
+						{ctor: '::', _0: _p43._0._1, _1: tails})
+				};
+			}
+		}
+	}
+};
+var _elm_community$list_extra$List_Extra$intercalate = function (xs) {
+	return function (_p45) {
+		return _elm_lang$core$List$concat(
+			A2(_elm_lang$core$List$intersperse, xs, _p45));
+	};
+};
+var _elm_community$list_extra$List_Extra$filterNot = F2(
+	function (pred, list) {
+		return A2(
+			_elm_lang$core$List$filter,
+			function (_p46) {
+				return !pred(_p46);
+			},
+			list);
+	});
+var _elm_community$list_extra$List_Extra$removeAt = F2(
+	function (index, l) {
+		if (_elm_lang$core$Native_Utils.cmp(index, 0) < 0) {
+			return l;
+		} else {
+			var tail = _elm_lang$core$List$tail(
+				A2(_elm_lang$core$List$drop, index, l));
+			var head = A2(_elm_lang$core$List$take, index, l);
+			var _p47 = tail;
+			if (_p47.ctor === 'Nothing') {
+				return l;
+			} else {
+				return A2(_elm_lang$core$List$append, head, _p47._0);
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$singleton = function (x) {
+	return {
+		ctor: '::',
+		_0: x,
+		_1: {ctor: '[]'}
+	};
+};
+var _elm_community$list_extra$List_Extra$stableSortWith = F2(
+	function (pred, list) {
+		var predWithIndex = F2(
+			function (_p49, _p48) {
+				var _p50 = _p49;
+				var _p51 = _p48;
+				var result = A2(pred, _p50._0, _p51._0);
+				var _p52 = result;
+				if (_p52.ctor === 'EQ') {
+					return A2(_elm_lang$core$Basics$compare, _p50._1, _p51._1);
+				} else {
+					return result;
+				}
+			});
+		var listWithIndex = A2(
+			_elm_lang$core$List$indexedMap,
+			F2(
+				function (i, a) {
+					return {ctor: '_Tuple2', _0: a, _1: i};
+				}),
+			list);
+		return A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$Tuple$first,
+			A2(_elm_lang$core$List$sortWith, predWithIndex, listWithIndex));
+	});
+var _elm_community$list_extra$List_Extra$setAt = F3(
+	function (index, value, l) {
+		if (_elm_lang$core$Native_Utils.cmp(index, 0) < 0) {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			var tail = _elm_lang$core$List$tail(
+				A2(_elm_lang$core$List$drop, index, l));
+			var head = A2(_elm_lang$core$List$take, index, l);
+			var _p53 = tail;
+			if (_p53.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return _elm_lang$core$Maybe$Just(
+					A2(
+						_elm_lang$core$List$append,
+						head,
+						{ctor: '::', _0: value, _1: _p53._0}));
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$remove = F2(
+	function (x, xs) {
+		var _p54 = xs;
+		if (_p54.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			var _p56 = _p54._1;
+			var _p55 = _p54._0;
+			return _elm_lang$core$Native_Utils.eq(x, _p55) ? _p56 : {
+				ctor: '::',
+				_0: _p55,
+				_1: A2(_elm_community$list_extra$List_Extra$remove, x, _p56)
+			};
+		}
+	});
+var _elm_community$list_extra$List_Extra$updateIfIndex = F3(
+	function (predicate, update, list) {
+		return A2(
+			_elm_lang$core$List$indexedMap,
+			F2(
+				function (i, x) {
+					return predicate(i) ? update(x) : x;
+				}),
+			list);
+	});
+var _elm_community$list_extra$List_Extra$updateAt = F3(
+	function (index, update, list) {
+		return ((_elm_lang$core$Native_Utils.cmp(index, 0) < 0) || (_elm_lang$core$Native_Utils.cmp(
+			index,
+			_elm_lang$core$List$length(list)) > -1)) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+			A3(
+				_elm_community$list_extra$List_Extra$updateIfIndex,
+				F2(
+					function (x, y) {
+						return _elm_lang$core$Native_Utils.eq(x, y);
+					})(index),
+				update,
+				list));
+	});
+var _elm_community$list_extra$List_Extra$updateIf = F3(
+	function (predicate, update, list) {
+		return A2(
+			_elm_lang$core$List$map,
+			function (item) {
+				return predicate(item) ? update(item) : item;
+			},
+			list);
+	});
+var _elm_community$list_extra$List_Extra$replaceIf = F3(
+	function (predicate, replacement, list) {
+		return A3(
+			_elm_community$list_extra$List_Extra$updateIf,
+			predicate,
+			_elm_lang$core$Basics$always(replacement),
+			list);
+	});
+var _elm_community$list_extra$List_Extra$findIndices = function (p) {
+	return function (_p57) {
+		return A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$Tuple$first,
+			A2(
+				_elm_lang$core$List$filter,
+				function (_p58) {
+					var _p59 = _p58;
+					return p(_p59._1);
+				},
+				A2(
+					_elm_lang$core$List$indexedMap,
+					F2(
+						function (v0, v1) {
+							return {ctor: '_Tuple2', _0: v0, _1: v1};
+						}),
+					_p57)));
+	};
+};
+var _elm_community$list_extra$List_Extra$findIndex = function (p) {
+	return function (_p60) {
+		return _elm_lang$core$List$head(
+			A2(_elm_community$list_extra$List_Extra$findIndices, p, _p60));
+	};
+};
+var _elm_community$list_extra$List_Extra$elemIndices = function (x) {
+	return _elm_community$list_extra$List_Extra$findIndices(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			})(x));
+};
+var _elm_community$list_extra$List_Extra$elemIndex = function (x) {
+	return _elm_community$list_extra$List_Extra$findIndex(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			})(x));
+};
+var _elm_community$list_extra$List_Extra$find = F2(
+	function (predicate, list) {
+		find:
+		while (true) {
+			var _p61 = list;
+			if (_p61.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p62 = _p61._0;
+				if (predicate(_p62)) {
+					return _elm_lang$core$Maybe$Just(_p62);
+				} else {
+					var _v41 = predicate,
+						_v42 = _p61._1;
+					predicate = _v41;
+					list = _v42;
+					continue find;
+				}
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$notMember = function (x) {
+	return function (_p63) {
+		return !A2(_elm_lang$core$List$member, x, _p63);
+	};
+};
+var _elm_community$list_extra$List_Extra$andThen = _elm_lang$core$List$concatMap;
+var _elm_community$list_extra$List_Extra$lift2 = F3(
+	function (f, la, lb) {
+		return A2(
+			_elm_community$list_extra$List_Extra$andThen,
+			function (a) {
+				return A2(
+					_elm_community$list_extra$List_Extra$andThen,
+					function (b) {
+						return {
+							ctor: '::',
+							_0: A2(f, a, b),
+							_1: {ctor: '[]'}
+						};
+					},
+					lb);
+			},
+			la);
+	});
+var _elm_community$list_extra$List_Extra$lift3 = F4(
+	function (f, la, lb, lc) {
+		return A2(
+			_elm_community$list_extra$List_Extra$andThen,
+			function (a) {
+				return A2(
+					_elm_community$list_extra$List_Extra$andThen,
+					function (b) {
+						return A2(
+							_elm_community$list_extra$List_Extra$andThen,
+							function (c) {
+								return {
+									ctor: '::',
+									_0: A3(f, a, b, c),
+									_1: {ctor: '[]'}
+								};
+							},
+							lc);
+					},
+					lb);
+			},
+			la);
+	});
+var _elm_community$list_extra$List_Extra$lift4 = F5(
+	function (f, la, lb, lc, ld) {
+		return A2(
+			_elm_community$list_extra$List_Extra$andThen,
+			function (a) {
+				return A2(
+					_elm_community$list_extra$List_Extra$andThen,
+					function (b) {
+						return A2(
+							_elm_community$list_extra$List_Extra$andThen,
+							function (c) {
+								return A2(
+									_elm_community$list_extra$List_Extra$andThen,
+									function (d) {
+										return {
+											ctor: '::',
+											_0: A4(f, a, b, c, d),
+											_1: {ctor: '[]'}
+										};
+									},
+									ld);
+							},
+							lc);
+					},
+					lb);
+			},
+			la);
+	});
+var _elm_community$list_extra$List_Extra$andMap = F2(
+	function (l, fl) {
+		return A3(
+			_elm_lang$core$List$map2,
+			F2(
+				function (x, y) {
+					return x(y);
+				}),
+			fl,
+			l);
+	});
+var _elm_community$list_extra$List_Extra$uniqueHelp = F3(
+	function (f, existing, remaining) {
+		uniqueHelp:
+		while (true) {
+			var _p64 = remaining;
+			if (_p64.ctor === '[]') {
+				return {ctor: '[]'};
+			} else {
+				var _p66 = _p64._1;
+				var _p65 = _p64._0;
+				var computedFirst = f(_p65);
+				if (A2(_elm_lang$core$Set$member, computedFirst, existing)) {
+					var _v44 = f,
+						_v45 = existing,
+						_v46 = _p66;
+					f = _v44;
+					existing = _v45;
+					remaining = _v46;
+					continue uniqueHelp;
+				} else {
+					return {
+						ctor: '::',
+						_0: _p65,
+						_1: A3(
+							_elm_community$list_extra$List_Extra$uniqueHelp,
+							f,
+							A2(_elm_lang$core$Set$insert, computedFirst, existing),
+							_p66)
+					};
+				}
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$uniqueBy = F2(
+	function (f, list) {
+		return A3(_elm_community$list_extra$List_Extra$uniqueHelp, f, _elm_lang$core$Set$empty, list);
+	});
+var _elm_community$list_extra$List_Extra$allDifferentBy = F2(
+	function (f, list) {
+		return _elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$List$length(list),
+			_elm_lang$core$List$length(
+				A2(_elm_community$list_extra$List_Extra$uniqueBy, f, list)));
+	});
+var _elm_community$list_extra$List_Extra$allDifferent = function (list) {
+	return A2(_elm_community$list_extra$List_Extra$allDifferentBy, _elm_lang$core$Basics$identity, list);
+};
+var _elm_community$list_extra$List_Extra$unique = function (list) {
+	return A3(_elm_community$list_extra$List_Extra$uniqueHelp, _elm_lang$core$Basics$identity, _elm_lang$core$Set$empty, list);
+};
+var _elm_community$list_extra$List_Extra$dropWhile = F2(
+	function (predicate, list) {
+		dropWhile:
+		while (true) {
+			var _p67 = list;
+			if (_p67.ctor === '[]') {
+				return {ctor: '[]'};
+			} else {
+				if (predicate(_p67._0)) {
+					var _v48 = predicate,
+						_v49 = _p67._1;
+					predicate = _v48;
+					list = _v49;
+					continue dropWhile;
+				} else {
+					return list;
+				}
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$takeWhile = F2(
+	function (predicate, list) {
+		var _p68 = list;
+		if (_p68.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			var _p69 = _p68._0;
+			return predicate(_p69) ? {
+				ctor: '::',
+				_0: _p69,
+				_1: A2(_elm_community$list_extra$List_Extra$takeWhile, predicate, _p68._1)
+			} : {ctor: '[]'};
+		}
+	});
+var _elm_community$list_extra$List_Extra$span = F2(
+	function (p, xs) {
+		return {
+			ctor: '_Tuple2',
+			_0: A2(_elm_community$list_extra$List_Extra$takeWhile, p, xs),
+			_1: A2(_elm_community$list_extra$List_Extra$dropWhile, p, xs)
+		};
+	});
+var _elm_community$list_extra$List_Extra$break = function (p) {
+	return _elm_community$list_extra$List_Extra$span(
+		function (_p70) {
+			return !p(_p70);
+		});
+};
+var _elm_community$list_extra$List_Extra$groupWhile = F2(
+	function (eq, xs_) {
+		var _p71 = xs_;
+		if (_p71.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			var _p73 = _p71._0;
+			var _p72 = A2(
+				_elm_community$list_extra$List_Extra$span,
+				eq(_p73),
+				_p71._1);
+			var ys = _p72._0;
+			var zs = _p72._1;
+			return {
+				ctor: '::',
+				_0: {ctor: '::', _0: _p73, _1: ys},
+				_1: A2(_elm_community$list_extra$List_Extra$groupWhile, eq, zs)
+			};
+		}
+	});
+var _elm_community$list_extra$List_Extra$group = _elm_community$list_extra$List_Extra$groupWhile(
+	F2(
+		function (x, y) {
+			return _elm_lang$core$Native_Utils.eq(x, y);
+		}));
+var _elm_community$list_extra$List_Extra$minimumBy = F2(
+	function (f, ls) {
+		var minBy = F2(
+			function (x, _p74) {
+				var _p75 = _p74;
+				var _p76 = _p75._1;
+				var fx = f(x);
+				return (_elm_lang$core$Native_Utils.cmp(fx, _p76) < 0) ? {ctor: '_Tuple2', _0: x, _1: fx} : {ctor: '_Tuple2', _0: _p75._0, _1: _p76};
+			});
+		var _p77 = ls;
+		if (_p77.ctor === '::') {
+			if (_p77._1.ctor === '[]') {
+				return _elm_lang$core$Maybe$Just(_p77._0);
+			} else {
+				var _p78 = _p77._0;
+				return _elm_lang$core$Maybe$Just(
+					_elm_lang$core$Tuple$first(
+						A3(
+							_elm_lang$core$List$foldl,
+							minBy,
+							{
+								ctor: '_Tuple2',
+								_0: _p78,
+								_1: f(_p78)
+							},
+							_p77._1)));
+			}
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_community$list_extra$List_Extra$maximumBy = F2(
+	function (f, ls) {
+		var maxBy = F2(
+			function (x, _p79) {
+				var _p80 = _p79;
+				var _p81 = _p80._1;
+				var fx = f(x);
+				return (_elm_lang$core$Native_Utils.cmp(fx, _p81) > 0) ? {ctor: '_Tuple2', _0: x, _1: fx} : {ctor: '_Tuple2', _0: _p80._0, _1: _p81};
+			});
+		var _p82 = ls;
+		if (_p82.ctor === '::') {
+			if (_p82._1.ctor === '[]') {
+				return _elm_lang$core$Maybe$Just(_p82._0);
+			} else {
+				var _p83 = _p82._0;
+				return _elm_lang$core$Maybe$Just(
+					_elm_lang$core$Tuple$first(
+						A3(
+							_elm_lang$core$List$foldl,
+							maxBy,
+							{
+								ctor: '_Tuple2',
+								_0: _p83,
+								_1: f(_p83)
+							},
+							_p82._1)));
+			}
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_community$list_extra$List_Extra$uncons = function (xs) {
+	var _p84 = xs;
+	if (_p84.ctor === '[]') {
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$Maybe$Just(
+			{ctor: '_Tuple2', _0: _p84._0, _1: _p84._1});
+	}
+};
+var _elm_community$list_extra$List_Extra$swapAt = F3(
+	function (index1, index2, l) {
+		swapAt:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.eq(index1, index2)) {
+				return _elm_lang$core$Maybe$Just(l);
+			} else {
+				if (_elm_lang$core$Native_Utils.cmp(index1, index2) > 0) {
+					var _v57 = index2,
+						_v58 = index1,
+						_v59 = l;
+					index1 = _v57;
+					index2 = _v58;
+					l = _v59;
+					continue swapAt;
+				} else {
+					if (_elm_lang$core$Native_Utils.cmp(index1, 0) < 0) {
+						return _elm_lang$core$Maybe$Nothing;
+					} else {
+						var _p85 = A2(_elm_community$list_extra$List_Extra$splitAt, index1, l);
+						var part1 = _p85._0;
+						var tail1 = _p85._1;
+						var _p86 = A2(_elm_community$list_extra$List_Extra$splitAt, index2 - index1, tail1);
+						var head2 = _p86._0;
+						var tail2 = _p86._1;
+						return A3(
+							_elm_lang$core$Maybe$map2,
+							F2(
+								function (_p88, _p87) {
+									var _p89 = _p88;
+									var _p90 = _p87;
+									return _elm_lang$core$List$concat(
+										{
+											ctor: '::',
+											_0: part1,
+											_1: {
+												ctor: '::',
+												_0: {ctor: '::', _0: _p90._0, _1: _p89._1},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '::', _0: _p89._0, _1: _p90._1},
+													_1: {ctor: '[]'}
+												}
+											}
+										});
+								}),
+							_elm_community$list_extra$List_Extra$uncons(head2),
+							_elm_community$list_extra$List_Extra$uncons(tail2));
+					}
+				}
+			}
+		}
+	});
+var _elm_community$list_extra$List_Extra$iterate = F2(
+	function (f, x) {
+		var _p91 = f(x);
+		if (_p91.ctor === 'Just') {
+			return {
+				ctor: '::',
+				_0: x,
+				_1: A2(_elm_community$list_extra$List_Extra$iterate, f, _p91._0)
+			};
+		} else {
+			return {
+				ctor: '::',
+				_0: x,
+				_1: {ctor: '[]'}
+			};
+		}
+	});
+var _elm_community$list_extra$List_Extra$getAt = F2(
+	function (idx, xs) {
+		return (_elm_lang$core$Native_Utils.cmp(idx, 0) < 0) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$List$head(
+			A2(_elm_lang$core$List$drop, idx, xs));
+	});
+var _elm_community$list_extra$List_Extra_ops = _elm_community$list_extra$List_Extra_ops || {};
+_elm_community$list_extra$List_Extra_ops['!!'] = _elm_lang$core$Basics$flip(_elm_community$list_extra$List_Extra$getAt);
+var _elm_community$list_extra$List_Extra$init = function () {
+	var maybe = F2(
+		function (d, f) {
+			return function (_p92) {
+				return A2(
+					_elm_lang$core$Maybe$withDefault,
+					d,
+					A2(_elm_lang$core$Maybe$map, f, _p92));
+			};
+		});
+	return A2(
+		_elm_lang$core$List$foldr,
+		function (x) {
+			return function (_p93) {
+				return _elm_lang$core$Maybe$Just(
+					A3(
+						maybe,
+						{ctor: '[]'},
+						F2(
+							function (x, y) {
+								return {ctor: '::', _0: x, _1: y};
+							})(x),
+						_p93));
+			};
+		},
+		_elm_lang$core$Maybe$Nothing);
+}();
+var _elm_community$list_extra$List_Extra$last = _elm_community$list_extra$List_Extra$foldl1(
+	_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always));
+
+var _dgendill$calculator_in_elm_lang$Expression$showExpr = function (e) {
+	return A3(
+		_elm_lang$core$List$foldr,
+		F2(
+			function (s, acc) {
+				var _p0 = s;
+				switch (_p0.ctor) {
+					case 'Add':
+						return A2(_elm_lang$core$Basics_ops['++'], acc, '+');
+					case 'Sub':
+						return A2(_elm_lang$core$Basics_ops['++'], acc, '-');
+					case 'Mult':
+						return A2(_elm_lang$core$Basics_ops['++'], acc, '*');
+					case 'Div':
+						return A2(_elm_lang$core$Basics_ops['++'], acc, '/');
+					case 'LParen':
+						return A2(_elm_lang$core$Basics_ops['++'], acc, '(');
+					case 'RParen':
+						return A2(_elm_lang$core$Basics_ops['++'], acc, ')');
+					case 'N':
+						return A2(
+							_elm_lang$core$Basics_ops['++'],
+							acc,
+							_elm_lang$core$Basics$toString(_p0._0));
+					default:
+						return A2(_elm_lang$core$Basics_ops['++'], acc, 'Nil');
+				}
+			}),
+		'',
+		e);
+};
+var _dgendill$calculator_in_elm_lang$Expression$liftMaybes = F3(
+	function (f, c, d) {
+		var _p1 = {ctor: '_Tuple2', _0: c, _1: d};
+		if (_p1._0.ctor === 'Just') {
+			if (_p1._1.ctor === 'Just') {
+				return A2(f, _p1._0._0, _p1._1._0);
+			} else {
+				return {
+					ctor: '::',
+					_0: _p1._0._0,
+					_1: {ctor: '[]'}
+				};
+			}
+		} else {
+			if (_p1._1.ctor === 'Just') {
+				return _p1._1._0;
+			} else {
+				return {ctor: '[]'};
+			}
+		}
+	});
+var _dgendill$calculator_in_elm_lang$Expression$compareSy = F2(
+	function (s1, s2) {
+		if (_elm_lang$core$Native_Utils.eq(s1, s2)) {
+			return _elm_lang$core$Basics$EQ;
+		} else {
+			var _p2 = {ctor: '_Tuple2', _0: s1, _1: s2};
+			_v2_12:
+			do {
+				switch (_p2._0.ctor) {
+					case 'Mult':
+						switch (_p2._1.ctor) {
+							case 'Div':
+								return _elm_lang$core$Basics$EQ;
+							case 'Add':
+								return _elm_lang$core$Basics$GT;
+							case 'Sub':
+								return _elm_lang$core$Basics$GT;
+							default:
+								break _v2_12;
+						}
+					case 'Div':
+						switch (_p2._1.ctor) {
+							case 'Mult':
+								return _elm_lang$core$Basics$EQ;
+							case 'Add':
+								return _elm_lang$core$Basics$GT;
+							case 'Sub':
+								return _elm_lang$core$Basics$GT;
+							default:
+								break _v2_12;
+						}
+					case 'Add':
+						switch (_p2._1.ctor) {
+							case 'Sub':
+								return _elm_lang$core$Basics$EQ;
+							case 'Mult':
+								return _elm_lang$core$Basics$LT;
+							case 'Div':
+								return _elm_lang$core$Basics$LT;
+							default:
+								break _v2_12;
+						}
+					case 'Sub':
+						switch (_p2._1.ctor) {
+							case 'Add':
+								return _elm_lang$core$Basics$EQ;
+							case 'Mult':
+								return _elm_lang$core$Basics$LT;
+							case 'Div':
+								return _elm_lang$core$Basics$LT;
+							default:
+								break _v2_12;
+						}
+					default:
+						break _v2_12;
+				}
+			} while(false);
+			return _elm_lang$core$Basics$LT;
+		}
+	});
+var _dgendill$calculator_in_elm_lang$Expression$isOperator = function (s) {
+	var _p3 = s;
+	switch (_p3.ctor) {
+		case 'Add':
+			return true;
+		case 'Sub':
+			return true;
+		case 'Mult':
+			return true;
+		case 'Div':
+			return true;
+		default:
+			return false;
+	}
+};
+var _dgendill$calculator_in_elm_lang$Expression$isOperand = function (s) {
+	var _p4 = s;
+	if (_p4.ctor === 'N') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _dgendill$calculator_in_elm_lang$Expression$Nil = {ctor: 'Nil'};
+var _dgendill$calculator_in_elm_lang$Expression$head_ = function (e) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		_dgendill$calculator_in_elm_lang$Expression$Nil,
+		_elm_lang$core$List$head(e));
+};
+var _dgendill$calculator_in_elm_lang$Expression$tail_ = function (e) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		{
+			ctor: '::',
+			_0: _dgendill$calculator_in_elm_lang$Expression$Nil,
+			_1: {ctor: '[]'}
+		},
+		_elm_lang$core$List$tail(e));
+};
+var _dgendill$calculator_in_elm_lang$Expression$compareOps = F4(
+	function (exp_, opstack_, nexp_, symbol) {
+		compareOps:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.eq(
+				A2(
+					_dgendill$calculator_in_elm_lang$Expression$compareSy,
+					_dgendill$calculator_in_elm_lang$Expression$head_(opstack_),
+					symbol),
+				_elm_lang$core$Basics$LT)) {
+				return {
+					ctor: '_Tuple3',
+					_0: exp_,
+					_1: {ctor: '::', _0: symbol, _1: opstack_},
+					_2: nexp_
+				};
+			} else {
+				var _v5 = exp_,
+					_v6 = _dgendill$calculator_in_elm_lang$Expression$tail_(opstack_),
+					_v7 = {
+					ctor: '::',
+					_0: _dgendill$calculator_in_elm_lang$Expression$head_(opstack_),
+					_1: nexp_
+				},
+					_v8 = symbol;
+				exp_ = _v5;
+				opstack_ = _v6;
+				nexp_ = _v7;
+				symbol = _v8;
+				continue compareOps;
+			}
+		}
+	});
+var _dgendill$calculator_in_elm_lang$Expression$getAt_ = F2(
+	function (idx, xs) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_dgendill$calculator_in_elm_lang$Expression$Nil,
+			A2(_elm_community$list_extra$List_Extra$getAt, idx, xs));
+	});
+var _dgendill$calculator_in_elm_lang$Expression$N = function (a) {
+	return {ctor: 'N', _0: a};
+};
+var _dgendill$calculator_in_elm_lang$Expression$basicEval = F3(
+	function (a, b, c) {
+		var _p5 = {ctor: '_Tuple3', _0: a, _1: b, _2: c};
+		_v9_5:
+		do {
+			if ((_p5._0.ctor === 'N') && (_p5._1.ctor === 'N')) {
+				switch (_p5._2.ctor) {
+					case 'Add':
+						return _elm_lang$core$Maybe$Just(
+							_dgendill$calculator_in_elm_lang$Expression$N(_p5._0._0 + _p5._1._0));
+					case 'Sub':
+						return _elm_lang$core$Maybe$Just(
+							_dgendill$calculator_in_elm_lang$Expression$N(_p5._0._0 - _p5._1._0));
+					case 'Mult':
+						return _elm_lang$core$Maybe$Just(
+							_dgendill$calculator_in_elm_lang$Expression$N(_p5._0._0 * _p5._1._0));
+					case 'Div':
+						if (_p5._1._0 === 0) {
+							return _elm_lang$core$Maybe$Nothing;
+						} else {
+							return _elm_lang$core$Maybe$Just(
+								_dgendill$calculator_in_elm_lang$Expression$N(_p5._0._0 / _p5._1._0));
+						}
+					default:
+						break _v9_5;
+				}
+			} else {
+				break _v9_5;
+			}
+		} while(false);
+		return _elm_lang$core$Maybe$Nothing;
+	});
+var _dgendill$calculator_in_elm_lang$Expression$eval_ = F2(
+	function (exp, stack) {
+		eval_:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$List$length(stack),
+				1) && _elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$List$length(exp),
+				0)) {
+				return _elm_lang$core$Maybe$Just(
+					_dgendill$calculator_in_elm_lang$Expression$head_(stack));
+			} else {
+				var _p6 = _dgendill$calculator_in_elm_lang$Expression$head_(exp);
+				switch (_p6.ctor) {
+					case 'Nil':
+						return _elm_lang$core$Maybe$Nothing;
+					case 'N':
+						var _v11 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
+							_v12 = {
+							ctor: '::',
+							_0: _dgendill$calculator_in_elm_lang$Expression$head_(exp),
+							_1: stack
+						};
+						exp = _v11;
+						stack = _v12;
+						continue eval_;
+					default:
+						if (_elm_lang$core$Native_Utils.cmp(
+							_elm_lang$core$List$length(stack),
+							2) > -1) {
+							var result = A3(
+								_dgendill$calculator_in_elm_lang$Expression$basicEval,
+								A2(_dgendill$calculator_in_elm_lang$Expression$getAt_, 0, stack),
+								A2(_dgendill$calculator_in_elm_lang$Expression$getAt_, 1, stack),
+								_p6);
+							if (_elm_lang$core$Native_Utils.eq(result, _elm_lang$core$Maybe$Nothing)) {
+								return _elm_lang$core$Maybe$Nothing;
+							} else {
+								var _v13 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
+									_v14 = A3(
+									_dgendill$calculator_in_elm_lang$Expression$liftMaybes,
+									F2(
+										function (x, y) {
+											return {ctor: '::', _0: x, _1: y};
+										}),
+									result,
+									_elm_lang$core$Maybe$Just(
+										A2(_elm_lang$core$List$drop, 2, stack)));
+								exp = _v13;
+								stack = _v14;
+								continue eval_;
+							}
+						} else {
+							return _elm_lang$core$Maybe$Nothing;
+						}
+				}
+			}
+		}
+	});
+var _dgendill$calculator_in_elm_lang$Expression$eval = function (exp) {
+	var _p7 = A2(
+		_dgendill$calculator_in_elm_lang$Expression$eval_,
+		exp,
+		{ctor: '[]'});
+	if (_p7.ctor === 'Nothing') {
+		return {ctor: '[]'};
+	} else {
+		return {
+			ctor: '::',
+			_0: _p7._0,
+			_1: {ctor: '[]'}
+		};
+	}
+};
+var _dgendill$calculator_in_elm_lang$Expression$RParen = {ctor: 'RParen'};
+var _dgendill$calculator_in_elm_lang$Expression$LParen = {ctor: 'LParen'};
+var _dgendill$calculator_in_elm_lang$Expression$popStack = F3(
+	function (exp_, opstack_, nexp_) {
+		popStack:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.eq(
+				_dgendill$calculator_in_elm_lang$Expression$head_(opstack_),
+				_dgendill$calculator_in_elm_lang$Expression$LParen)) {
+				return {
+					ctor: '_Tuple3',
+					_0: exp_,
+					_1: _dgendill$calculator_in_elm_lang$Expression$tail_(opstack_),
+					_2: nexp_
+				};
+			} else {
+				var _v16 = exp_,
+					_v17 = _dgendill$calculator_in_elm_lang$Expression$tail_(opstack_),
+					_v18 = {
+					ctor: '::',
+					_0: _dgendill$calculator_in_elm_lang$Expression$head_(opstack_),
+					_1: nexp_
+				};
+				exp_ = _v16;
+				opstack_ = _v17;
+				nexp_ = _v18;
+				continue popStack;
+			}
+		}
+	});
+var _dgendill$calculator_in_elm_lang$Expression$infixToPrefix_ = F3(
+	function (exp, opstack, nexp) {
+		infixToPrefix_:
+		while (true) {
+			var symbol = _dgendill$calculator_in_elm_lang$Expression$head_(exp);
+			if (_dgendill$calculator_in_elm_lang$Expression$isOperand(symbol)) {
+				var _v19 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
+					_v20 = opstack,
+					_v21 = {ctor: '::', _0: symbol, _1: nexp};
+				exp = _v19;
+				opstack = _v20;
+				nexp = _v21;
+				continue infixToPrefix_;
+			} else {
+				if (_elm_lang$core$Native_Utils.eq(symbol, _dgendill$calculator_in_elm_lang$Expression$LParen)) {
+					var _v22 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
+						_v23 = {ctor: '::', _0: symbol, _1: opstack},
+						_v24 = nexp;
+					exp = _v22;
+					opstack = _v23;
+					nexp = _v24;
+					continue infixToPrefix_;
+				} else {
+					if (_elm_lang$core$Native_Utils.eq(symbol, _dgendill$calculator_in_elm_lang$Expression$RParen)) {
+						var _p8 = A3(_dgendill$calculator_in_elm_lang$Expression$popStack, exp, opstack, nexp);
+						var a = _p8._0;
+						var b = _p8._1;
+						var c = _p8._2;
+						var _v25 = _dgendill$calculator_in_elm_lang$Expression$tail_(a),
+							_v26 = b,
+							_v27 = c;
+						exp = _v25;
+						opstack = _v26;
+						nexp = _v27;
+						continue infixToPrefix_;
+					} else {
+						if (_dgendill$calculator_in_elm_lang$Expression$isOperator(symbol)) {
+							var _p9 = A4(_dgendill$calculator_in_elm_lang$Expression$compareOps, exp, opstack, nexp, symbol);
+							var a = _p9._0;
+							var b = _p9._1;
+							var c = _p9._2;
+							var _v28 = _dgendill$calculator_in_elm_lang$Expression$tail_(a),
+								_v29 = b,
+								_v30 = c;
+							exp = _v28;
+							opstack = _v29;
+							nexp = _v30;
+							continue infixToPrefix_;
+						} else {
+							return A2(
+								_elm_lang$core$List$append,
+								_elm_lang$core$List$reverse(nexp),
+								_elm_lang$core$List$reverse(opstack));
+						}
+					}
+				}
+			}
+		}
+	});
+var _dgendill$calculator_in_elm_lang$Expression$infixToPrefix = function (exp) {
+	return A3(
+		_dgendill$calculator_in_elm_lang$Expression$infixToPrefix_,
+		exp,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _dgendill$calculator_in_elm_lang$Expression$Div = {ctor: 'Div'};
+var _dgendill$calculator_in_elm_lang$Expression$Mult = {ctor: 'Mult'};
+var _dgendill$calculator_in_elm_lang$Expression$Sub = {ctor: 'Sub'};
+var _dgendill$calculator_in_elm_lang$Expression$Add = {ctor: 'Add'};
+var _dgendill$calculator_in_elm_lang$Expression$testExp = {
+	ctor: '::',
+	_0: _dgendill$calculator_in_elm_lang$Expression$N(5.0),
+	_1: {
+		ctor: '::',
+		_0: _dgendill$calculator_in_elm_lang$Expression$Add,
+		_1: {
+			ctor: '::',
+			_0: _dgendill$calculator_in_elm_lang$Expression$N(5.1),
+			_1: {ctor: '[]'}
+		}
+	}
+};
 
 var _dgendill$calculator_in_elm_lang$Calculator$viewportBackground = A3(_rtfeldman$elm_css$Css$rgb, 240, 240, 240);
 var _dgendill$calculator_in_elm_lang$Calculator$calcBorder = A3(
@@ -12941,68 +14550,21 @@ var _dgendill$calculator_in_elm_lang$Calculator$calcButton = F2(
 				}),
 			html);
 	});
-var _dgendill$calculator_in_elm_lang$Calculator$showExpression = function (expr) {
-	return _elm_lang$core$Native_Utils.eq(
-		_elm_lang$core$List$length(expr),
-		0) ? '0' : A3(
-		_elm_lang$core$List$foldr,
-		F2(
-			function (v, acc) {
-				var _p1 = v;
-				switch (_p1.ctor) {
-					case 'Addition':
-						return A2(_elm_lang$core$Basics_ops['++'], acc, '+');
-					case 'Subtraction':
-						return A2(_elm_lang$core$Basics_ops['++'], acc, '-');
-					default:
-						return A2(_elm_lang$core$Basics_ops['++'], acc, _p1._0);
-				}
-			}),
-		'',
-		expr);
-};
-var _dgendill$calculator_in_elm_lang$Calculator$showExpressionPolish = function (expr) {
-	return A2(
-		_dgendill$calculator_in_elm_lang$InfixPolishConversion$infixToPolishString,
-		' ',
-		A2(
-			_elm_lang$core$List$map,
-			_elm_lang$core$String$fromChar,
-			_elm_lang$core$String$toList(
-				_dgendill$calculator_in_elm_lang$Calculator$showExpression(expr))));
-};
-var _dgendill$calculator_in_elm_lang$Calculator$model = {
-	expr: {ctor: '[]'}
-};
-var _dgendill$calculator_in_elm_lang$Calculator$Model = function (a) {
-	return {expr: a};
-};
-var _dgendill$calculator_in_elm_lang$Calculator$N = function (a) {
-	return {ctor: 'N', _0: a};
-};
-var _dgendill$calculator_in_elm_lang$Calculator$evalExpression = function (exprList) {
-	var v = _dgendill$calculator_in_elm_lang$StringEval$eval(
-		_dgendill$calculator_in_elm_lang$Calculator$showExpression(exprList));
-	var _p2 = v;
-	if (_p2 === 0) {
-		return {ctor: '[]'};
+var _dgendill$calculator_in_elm_lang$Calculator$showExpression = function (exp) {
+	var r = _dgendill$calculator_in_elm_lang$Expression$showExpr(exp);
+	var _p1 = r;
+	if (_p1 === '') {
+		return '0';
 	} else {
-		return {
-			ctor: '::',
-			_0: _dgendill$calculator_in_elm_lang$Calculator$N(
-				_elm_lang$core$Basics$toString(v)),
-			_1: {ctor: '[]'}
-		};
+		return r;
 	}
 };
-var _dgendill$calculator_in_elm_lang$Calculator$Subtraction = {ctor: 'Subtraction'};
-var _dgendill$calculator_in_elm_lang$Calculator$Addition = {ctor: 'Addition'};
 var _dgendill$calculator_in_elm_lang$Calculator$update = F2(
 	function (msg, model) {
-		var _p3 = msg;
-		switch (_p3.ctor) {
-			case 'Num':
-				if (_p3._0 === 0.0) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'MNum':
+				if (_p2._0 === 0.0) {
 					return _elm_lang$core$Native_Utils.eq(
 						_elm_lang$core$List$length(model.expr),
 						0) ? model : {
@@ -13011,7 +14573,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$update = F2(
 								function (x, y) {
 									return {ctor: '::', _0: x, _1: y};
 								}),
-							_dgendill$calculator_in_elm_lang$Calculator$N('0'),
+							_dgendill$calculator_in_elm_lang$Expression$N(0),
 							model.expr)
 					};
 				} else {
@@ -13021,17 +14583,29 @@ var _dgendill$calculator_in_elm_lang$Calculator$update = F2(
 								function (x, y) {
 									return {ctor: '::', _0: x, _1: y};
 								}),
-							_dgendill$calculator_in_elm_lang$Calculator$N(
-								_elm_lang$core$Basics$toString(_p3._0)),
+							_dgendill$calculator_in_elm_lang$Expression$N(_p2._0),
 							model.expr)
 					};
 				}
-			case 'Add':
+			case 'MAdd':
+				var _p3 = _elm_lang$core$List$head(model.expr);
+				if (_p3.ctor === 'Just') {
+					if (_p3._0.ctor === 'N') {
+						return {
+							expr: {ctor: '::', _0: _dgendill$calculator_in_elm_lang$Expression$Add, _1: model.expr}
+						};
+					} else {
+						return model;
+					}
+				} else {
+					return model;
+				}
+			case 'MSubtract':
 				var _p4 = _elm_lang$core$List$head(model.expr);
 				if (_p4.ctor === 'Just') {
 					if (_p4._0.ctor === 'N') {
 						return {
-							expr: {ctor: '::', _0: _dgendill$calculator_in_elm_lang$Calculator$Addition, _1: model.expr}
+							expr: {ctor: '::', _0: _dgendill$calculator_in_elm_lang$Expression$Sub, _1: model.expr}
 						};
 					} else {
 						return model;
@@ -13039,12 +14613,12 @@ var _dgendill$calculator_in_elm_lang$Calculator$update = F2(
 				} else {
 					return model;
 				}
-			case 'Subtract':
+			case 'MMult':
 				var _p5 = _elm_lang$core$List$head(model.expr);
 				if (_p5.ctor === 'Just') {
 					if (_p5._0.ctor === 'N') {
 						return {
-							expr: {ctor: '::', _0: _dgendill$calculator_in_elm_lang$Calculator$Subtraction, _1: model.expr}
+							expr: {ctor: '::', _0: _dgendill$calculator_in_elm_lang$Expression$Mult, _1: model.expr}
 						};
 					} else {
 						return model;
@@ -13052,23 +14626,45 @@ var _dgendill$calculator_in_elm_lang$Calculator$update = F2(
 				} else {
 					return model;
 				}
-			case 'Clear':
+			case 'MDivide':
+				var _p6 = _elm_lang$core$List$head(model.expr);
+				if (_p6.ctor === 'Just') {
+					if (_p6._0.ctor === 'N') {
+						return {
+							expr: {ctor: '::', _0: _dgendill$calculator_in_elm_lang$Expression$Div, _1: model.expr}
+						};
+					} else {
+						return model;
+					}
+				} else {
+					return model;
+				}
+			case 'MClear':
 				return {
 					expr: {ctor: '[]'}
 				};
 			default:
 				return {
-					expr: _dgendill$calculator_in_elm_lang$Calculator$evalExpression(model.expr)
+					expr: _dgendill$calculator_in_elm_lang$Expression$eval(
+						_dgendill$calculator_in_elm_lang$Expression$infixToPrefix(model.expr))
 				};
 		}
 	});
-var _dgendill$calculator_in_elm_lang$Calculator$Evaluate = {ctor: 'Evaluate'};
-var _dgendill$calculator_in_elm_lang$Calculator$Clear = {ctor: 'Clear'};
-var _dgendill$calculator_in_elm_lang$Calculator$Num = function (a) {
-	return {ctor: 'Num', _0: a};
+var _dgendill$calculator_in_elm_lang$Calculator$model = {
+	expr: {ctor: '[]'}
 };
-var _dgendill$calculator_in_elm_lang$Calculator$Subtract = {ctor: 'Subtract'};
-var _dgendill$calculator_in_elm_lang$Calculator$Add = {ctor: 'Add'};
+var _dgendill$calculator_in_elm_lang$Calculator$Model = function (a) {
+	return {expr: a};
+};
+var _dgendill$calculator_in_elm_lang$Calculator$MMult = {ctor: 'MMult'};
+var _dgendill$calculator_in_elm_lang$Calculator$MDivide = {ctor: 'MDivide'};
+var _dgendill$calculator_in_elm_lang$Calculator$MEvaluate = {ctor: 'MEvaluate'};
+var _dgendill$calculator_in_elm_lang$Calculator$MClear = {ctor: 'MClear'};
+var _dgendill$calculator_in_elm_lang$Calculator$MNum = function (a) {
+	return {ctor: 'MNum', _0: a};
+};
+var _dgendill$calculator_in_elm_lang$Calculator$MSubtract = {ctor: 'MSubtract'};
+var _dgendill$calculator_in_elm_lang$Calculator$MAdd = {ctor: 'MAdd'};
 var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -13171,7 +14767,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 							{
 								ctor: '::',
 								_0: _elm_lang$html$Html_Events$onClick(
-									_dgendill$calculator_in_elm_lang$Calculator$Num(1.0)),
+									_dgendill$calculator_in_elm_lang$Calculator$MNum(1.0)),
 								_1: {ctor: '[]'}
 							},
 							{
@@ -13186,7 +14782,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(
-										_dgendill$calculator_in_elm_lang$Calculator$Num(2.0)),
+										_dgendill$calculator_in_elm_lang$Calculator$MNum(2.0)),
 									_1: {ctor: '[]'}
 								},
 								{
@@ -13201,7 +14797,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 									{
 										ctor: '::',
 										_0: _elm_lang$html$Html_Events$onClick(
-											_dgendill$calculator_in_elm_lang$Calculator$Num(3.0)),
+											_dgendill$calculator_in_elm_lang$Calculator$MNum(3.0)),
 										_1: {ctor: '[]'}
 									},
 									{
@@ -13216,7 +14812,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Events$onClick(
-												_dgendill$calculator_in_elm_lang$Calculator$Num(4.0)),
+												_dgendill$calculator_in_elm_lang$Calculator$MNum(4.0)),
 											_1: {ctor: '[]'}
 										},
 										{
@@ -13231,7 +14827,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 											{
 												ctor: '::',
 												_0: _elm_lang$html$Html_Events$onClick(
-													_dgendill$calculator_in_elm_lang$Calculator$Num(5.0)),
+													_dgendill$calculator_in_elm_lang$Calculator$MNum(5.0)),
 												_1: {ctor: '[]'}
 											},
 											{
@@ -13246,7 +14842,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 												{
 													ctor: '::',
 													_0: _elm_lang$html$Html_Events$onClick(
-														_dgendill$calculator_in_elm_lang$Calculator$Num(6.0)),
+														_dgendill$calculator_in_elm_lang$Calculator$MNum(6.0)),
 													_1: {ctor: '[]'}
 												},
 												{
@@ -13261,12 +14857,12 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 													{
 														ctor: '::',
 														_0: _elm_lang$html$Html_Events$onClick(
-															_dgendill$calculator_in_elm_lang$Calculator$Num(7.0)),
+															_dgendill$calculator_in_elm_lang$Calculator$MNum(8.0)),
 														_1: {ctor: '[]'}
 													},
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html$text('7'),
+														_0: _elm_lang$html$Html$text('8'),
 														_1: {ctor: '[]'}
 													}),
 												_1: {
@@ -13276,12 +14872,12 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 														{
 															ctor: '::',
 															_0: _elm_lang$html$Html_Events$onClick(
-																_dgendill$calculator_in_elm_lang$Calculator$Num(8.0)),
+																_dgendill$calculator_in_elm_lang$Calculator$MNum(7.0)),
 															_1: {ctor: '[]'}
 														},
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html$text('8'),
+															_0: _elm_lang$html$Html$text('7'),
 															_1: {ctor: '[]'}
 														}),
 													_1: {
@@ -13291,7 +14887,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 															{
 																ctor: '::',
 																_0: _elm_lang$html$Html_Events$onClick(
-																	_dgendill$calculator_in_elm_lang$Calculator$Num(9.0)),
+																	_dgendill$calculator_in_elm_lang$Calculator$MNum(9.0)),
 																_1: {ctor: '[]'}
 															},
 															{
@@ -13306,7 +14902,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 																{
 																	ctor: '::',
 																	_0: _elm_lang$html$Html_Events$onClick(
-																		_dgendill$calculator_in_elm_lang$Calculator$Num(0.0)),
+																		_dgendill$calculator_in_elm_lang$Calculator$MNum(0.0)),
 																	_1: {ctor: '[]'}
 																},
 																{
@@ -13320,7 +14916,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 																	_dgendill$calculator_in_elm_lang$Calculator$calcButton,
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$Subtract),
+																		_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$MSubtract),
 																		_1: {ctor: '[]'}
 																	},
 																	{
@@ -13334,7 +14930,7 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 																		_dgendill$calculator_in_elm_lang$Calculator$calcButton,
 																		{
 																			ctor: '::',
-																			_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$Add),
+																			_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$MAdd),
 																			_1: {ctor: '[]'}
 																		},
 																		{
@@ -13348,12 +14944,12 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 																			_dgendill$calculator_in_elm_lang$Calculator$calcButton,
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$Clear),
+																				_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$MMult),
 																				_1: {ctor: '[]'}
 																			},
 																			{
 																				ctor: '::',
-																				_0: _elm_lang$html$Html$text('X'),
+																				_0: _elm_lang$html$Html$text('*'),
 																				_1: {ctor: '[]'}
 																			}),
 																		_1: {
@@ -13362,15 +14958,45 @@ var _dgendill$calculator_in_elm_lang$Calculator$view = function (model) {
 																				_dgendill$calculator_in_elm_lang$Calculator$calcButton,
 																				{
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$Evaluate),
+																					_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$MDivide),
 																					_1: {ctor: '[]'}
 																				},
 																				{
 																					ctor: '::',
-																					_0: _elm_lang$html$Html$text('='),
+																					_0: _elm_lang$html$Html$text('/'),
 																					_1: {ctor: '[]'}
 																				}),
-																			_1: {ctor: '[]'}
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_dgendill$calculator_in_elm_lang$Calculator$calcButton,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$MClear),
+																						_1: {ctor: '[]'}
+																					},
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text('C'),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_dgendill$calculator_in_elm_lang$Calculator$calcButton,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Events$onClick(_dgendill$calculator_in_elm_lang$Calculator$MEvaluate),
+																							_1: {ctor: '[]'}
+																						},
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html$text('='),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {ctor: '[]'}
+																				}
+																			}
 																		}
 																	}
 																}

@@ -7,13 +7,10 @@ module Calculator exposing (main)
 import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (onClick)
-import Maybe
-import StringEval exposing(eval)
-import Regex
-import Array
 import Css as C exposing (pct, px, rgb, rgba, Mixin, width)
-import InfixPolishConversion
+import Expression exposing (Symbol(..), infixToPrefix, showExpr, eval)
 
+type alias Expression = List Symbol
 
 {-| Render the component -}
 main : Program Never Model Msg
@@ -27,93 +24,76 @@ main =
 
 {-| The Model is a list of symbols -}
 type alias Model =
-  { expr : List ExpressionSymbol }
+  { expr : Expression }
 
 
 model : Model
 model = { expr = [] }
 
 
-{-| An Expression is a list of symbols. -}
-type alias Expression = List ExpressionSymbol
-
-
-{-| We support the following symbols currently.  N is for numeric symbols. -}
-type ExpressionSymbol
-  = Addition
-  | Subtraction
-  | N String
-
 
 {-| These are the events that a user can trigger by interacting with the DOM -}
 type Msg
-  = Add
-  | Subtract
-  | Num Float
-  | Clear
-  | Evaluate
-
-
-{-| This is evaluated with native String.eval -}
-evalExpression : Expression -> Expression
-evalExpression exprList =
-  let v = (eval (showExpression exprList))
-  in
-    case v of
-      0 -> []
-      _ -> [N (toString v)]
+  = MAdd
+  | MSubtract
+  | MNum Float
+  | MClear
+  | MEvaluate
+  | MDivide
+  | MMult
 
 
 {-| Update the view... -}
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    Num 0.0 ->
+    MNum 0.0 ->
       if (List.length model.expr == 0)
       then model
-      else { expr = (::) (N "0") model.expr }
+      else { expr = (::) (N 0) model.expr }
 
-    Num a ->
-      { expr = (::) (N (toString a)) model.expr }
+    MNum a ->
+      { expr = (::) (N a) model.expr }
 
-    Add ->
+    MAdd ->
       case (List.head model.expr) of
-        Just (N b) -> { expr =  Addition ::  model.expr }
+        Just (N b) -> { expr =  Add ::  model.expr }
         Just (b)   -> model
         Nothing    -> model
 
-    Subtract ->
+    MSubtract ->
       case (List.head model.expr) of
-        Just (N b) -> { expr =  Subtraction :: model.expr }
+        Just (N b) -> { expr =  Sub :: model.expr }
         Just (b)   -> model
         Nothing    -> model
 
-    Clear ->
+    MMult ->
+      case (List.head model.expr) of
+        Just (N b) -> { expr =  Mult ::  model.expr }
+        Just (b)   -> model
+        Nothing    -> model
+
+    MDivide ->
+      case (List.head model.expr) of
+        Just (N b) -> { expr =  Div :: model.expr }
+        Just (b)   -> model
+        Nothing    -> model
+
+    MClear ->
       { expr = [] }
 
-    Evaluate ->
-      { expr = evalExpression model.expr }
-
-
-{-| Render the expression in reverse polish notation. -}
-showExpressionPolish : Expression -> String
-showExpressionPolish expr =
-  InfixPolishConversion.infixToPolishString " "
-  (List.map String.fromChar (String.toList (showExpression expr)))
+    MEvaluate ->
+      { expr = eval (infixToPrefix model.expr) }
 
 
 {-| Render the expression with infix notation. -}
 showExpression : Expression -> String
-showExpression expr =
-  if (List.length(expr) == 0)
-  then "0"
-  else (List.foldr
-    (\v acc ->
-      case v of
-        Addition -> acc  ++ "+"
-        Subtraction -> acc ++ "-"
-        N a -> acc ++ a
-    ) "" expr)
+showExpression exp =
+  let r = showExpr exp
+  in
+    case r of
+      "" -> "0"
+      _ -> r
 
 
 styles =
@@ -161,19 +141,21 @@ view model =
                    , C.property "justify-content" "space-between" ]
           ]
 
-      [ calcButton [ onClick (Num 1.0) ] [ text "1" ]
-      , calcButton [ onClick (Num 2.0) ] [ text "2" ]
-      , calcButton [ onClick (Num 3.0) ] [ text "3" ]
-      , calcButton [ onClick (Num 4.0) ] [ text "4" ]
-      , calcButton [ onClick (Num 5.0) ] [ text "5" ]
-      , calcButton [ onClick (Num 6.0) ] [ text "6" ]
-      , calcButton [ onClick (Num 7.0) ] [ text "7" ]
-      , calcButton [ onClick (Num 8.0) ] [ text "8" ]
-      , calcButton [ onClick (Num 9.0) ] [ text "9" ]
-      , calcButton [ onClick (Num 0.0) ] [ text "0" ]
-      , calcButton [ onClick Subtract ] [ text "-" ]
-      , calcButton [ onClick Add ] [ text "+" ]
-      , calcButton [ onClick Clear ] [ text "X" ]
-      , calcButton [ onClick Evaluate ] [ text "=" ]
+      [ calcButton [ onClick (MNum 1.0) ] [ text "1" ]
+      , calcButton [ onClick (MNum 2.0) ] [ text "2" ]
+      , calcButton [ onClick (MNum 3.0) ] [ text "3" ]
+      , calcButton [ onClick (MNum 4.0) ] [ text "4" ]
+      , calcButton [ onClick (MNum 5.0) ] [ text "5" ]
+      , calcButton [ onClick (MNum 6.0) ] [ text "6" ]
+      , calcButton [ onClick (MNum 8.0) ] [ text "8" ]
+      , calcButton [ onClick (MNum 7.0) ] [ text "7" ]
+      , calcButton [ onClick (MNum 9.0) ] [ text "9" ]
+      , calcButton [ onClick (MNum 0.0) ] [ text "0" ]
+      , calcButton [ onClick MSubtract ] [ text "-" ]
+      , calcButton [ onClick MAdd ] [ text "+" ]
+      , calcButton [ onClick MMult ] [ text "*" ]
+      , calcButton [ onClick MDivide ] [ text "/" ]
+      , calcButton [ onClick MClear ] [ text "C" ]
+      , calcButton [ onClick MEvaluate ] [ text "=" ]
       ]
     ]
