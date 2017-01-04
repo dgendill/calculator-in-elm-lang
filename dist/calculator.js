@@ -14359,8 +14359,8 @@ var _dgendill$calculator_in_elm_lang$Expression$eval_ = F2(
 							2) > -1) {
 							var result = A3(
 								_dgendill$calculator_in_elm_lang$Expression$basicEval,
-								A2(_dgendill$calculator_in_elm_lang$Expression$getAt_, 0, stack),
 								A2(_dgendill$calculator_in_elm_lang$Expression$getAt_, 1, stack),
+								A2(_dgendill$calculator_in_elm_lang$Expression$getAt_, 0, stack),
 								_p6);
 							if (_elm_lang$core$Native_Utils.eq(result, _elm_lang$core$Maybe$Nothing)) {
 								return _elm_lang$core$Maybe$Nothing;
@@ -14401,6 +14401,79 @@ var _dgendill$calculator_in_elm_lang$Expression$eval = function (exp) {
 		};
 	}
 };
+var _dgendill$calculator_in_elm_lang$Expression$mergeNumbers = F2(
+	function (exp, stack) {
+		mergeNumbers:
+		while (true) {
+			var numbers = A2(
+				_elm_community$list_extra$List_Extra$takeWhile,
+				function (s) {
+					var _p8 = s;
+					if (_p8.ctor === 'N') {
+						return true;
+					} else {
+						return false;
+					}
+				},
+				exp);
+			if (_elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$List$length(exp),
+				0) && (_elm_lang$core$Native_Utils.cmp(
+				_elm_lang$core$List$length(stack),
+				0) > 0)) {
+				return _elm_lang$core$Result$Ok(
+					_elm_lang$core$List$reverse(stack));
+			} else {
+				var _p9 = numbers;
+				if (_p9.ctor === '[]') {
+					var _v18 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
+						_v19 = {
+						ctor: '::',
+						_0: _dgendill$calculator_in_elm_lang$Expression$head_(exp),
+						_1: stack
+					};
+					exp = _v18;
+					stack = _v19;
+					continue mergeNumbers;
+				} else {
+					var number = A3(
+						_elm_lang$core$List$foldr,
+						F2(
+							function (n, a) {
+								var _p10 = n;
+								if (_p10.ctor === 'N') {
+									return A2(
+										_elm_lang$core$Basics_ops['++'],
+										_elm_lang$core$Basics$toString(_p10._0),
+										a);
+								} else {
+									return a;
+								}
+							}),
+						'',
+						numbers);
+					var _p11 = _elm_lang$core$String$toFloat(number);
+					if (_p11.ctor === 'Ok') {
+						var _v22 = A2(
+							_elm_lang$core$List$drop,
+							_elm_lang$core$List$length(numbers),
+							exp),
+							_v23 = {
+							ctor: '::',
+							_0: _dgendill$calculator_in_elm_lang$Expression$N(_p11._0),
+							_1: stack
+						};
+						exp = _v22;
+						stack = _v23;
+						continue mergeNumbers;
+					} else {
+						return _elm_lang$core$Result$Err(
+							A2(_elm_lang$core$Basics_ops['++'], 'Could not parse ', number));
+					}
+				}
+			}
+		}
+	});
 var _dgendill$calculator_in_elm_lang$Expression$RParen = {ctor: 'RParen'};
 var _dgendill$calculator_in_elm_lang$Expression$LParen = {ctor: 'LParen'};
 var _dgendill$calculator_in_elm_lang$Expression$popStack = F3(
@@ -14417,68 +14490,68 @@ var _dgendill$calculator_in_elm_lang$Expression$popStack = F3(
 					_2: nexp_
 				};
 			} else {
-				var _v16 = exp_,
-					_v17 = _dgendill$calculator_in_elm_lang$Expression$tail_(opstack_),
-					_v18 = {
+				var _v24 = exp_,
+					_v25 = _dgendill$calculator_in_elm_lang$Expression$tail_(opstack_),
+					_v26 = {
 					ctor: '::',
 					_0: _dgendill$calculator_in_elm_lang$Expression$head_(opstack_),
 					_1: nexp_
 				};
-				exp_ = _v16;
-				opstack_ = _v17;
-				nexp_ = _v18;
+				exp_ = _v24;
+				opstack_ = _v25;
+				nexp_ = _v26;
 				continue popStack;
 			}
 		}
 	});
-var _dgendill$calculator_in_elm_lang$Expression$infixToPrefix_ = F3(
+var _dgendill$calculator_in_elm_lang$Expression$infixToPostfix_ = F3(
 	function (exp, opstack, nexp) {
-		infixToPrefix_:
+		infixToPostfix_:
 		while (true) {
 			var symbol = _dgendill$calculator_in_elm_lang$Expression$head_(exp);
 			if (_dgendill$calculator_in_elm_lang$Expression$isOperand(symbol)) {
-				var _v19 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
-					_v20 = opstack,
-					_v21 = {ctor: '::', _0: symbol, _1: nexp};
-				exp = _v19;
-				opstack = _v20;
-				nexp = _v21;
-				continue infixToPrefix_;
+				var _v27 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
+					_v28 = opstack,
+					_v29 = {ctor: '::', _0: symbol, _1: nexp};
+				exp = _v27;
+				opstack = _v28;
+				nexp = _v29;
+				continue infixToPostfix_;
 			} else {
 				if (_elm_lang$core$Native_Utils.eq(symbol, _dgendill$calculator_in_elm_lang$Expression$LParen)) {
-					var _v22 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
-						_v23 = {ctor: '::', _0: symbol, _1: opstack},
-						_v24 = nexp;
-					exp = _v22;
-					opstack = _v23;
-					nexp = _v24;
-					continue infixToPrefix_;
+					var _v30 = _dgendill$calculator_in_elm_lang$Expression$tail_(exp),
+						_v31 = {ctor: '::', _0: symbol, _1: opstack},
+						_v32 = nexp;
+					exp = _v30;
+					opstack = _v31;
+					nexp = _v32;
+					continue infixToPostfix_;
 				} else {
 					if (_elm_lang$core$Native_Utils.eq(symbol, _dgendill$calculator_in_elm_lang$Expression$RParen)) {
-						var _p8 = A3(_dgendill$calculator_in_elm_lang$Expression$popStack, exp, opstack, nexp);
-						var a = _p8._0;
-						var b = _p8._1;
-						var c = _p8._2;
-						var _v25 = _dgendill$calculator_in_elm_lang$Expression$tail_(a),
-							_v26 = b,
-							_v27 = c;
-						exp = _v25;
-						opstack = _v26;
-						nexp = _v27;
-						continue infixToPrefix_;
+						var _p12 = A3(_dgendill$calculator_in_elm_lang$Expression$popStack, exp, opstack, nexp);
+						var a = _p12._0;
+						var b = _p12._1;
+						var c = _p12._2;
+						var _v33 = _dgendill$calculator_in_elm_lang$Expression$tail_(a),
+							_v34 = b,
+							_v35 = c;
+						exp = _v33;
+						opstack = _v34;
+						nexp = _v35;
+						continue infixToPostfix_;
 					} else {
 						if (_dgendill$calculator_in_elm_lang$Expression$isOperator(symbol)) {
-							var _p9 = A4(_dgendill$calculator_in_elm_lang$Expression$compareOps, exp, opstack, nexp, symbol);
-							var a = _p9._0;
-							var b = _p9._1;
-							var c = _p9._2;
-							var _v28 = _dgendill$calculator_in_elm_lang$Expression$tail_(a),
-								_v29 = b,
-								_v30 = c;
-							exp = _v28;
-							opstack = _v29;
-							nexp = _v30;
-							continue infixToPrefix_;
+							var _p13 = A4(_dgendill$calculator_in_elm_lang$Expression$compareOps, exp, opstack, nexp, symbol);
+							var a = _p13._0;
+							var b = _p13._1;
+							var c = _p13._2;
+							var _v36 = _dgendill$calculator_in_elm_lang$Expression$tail_(a),
+								_v37 = b,
+								_v38 = c;
+							exp = _v36;
+							opstack = _v37;
+							nexp = _v38;
+							continue infixToPostfix_;
 						} else {
 							return A2(
 								_elm_lang$core$List$append,
@@ -14490,12 +14563,43 @@ var _dgendill$calculator_in_elm_lang$Expression$infixToPrefix_ = F3(
 			}
 		}
 	});
-var _dgendill$calculator_in_elm_lang$Expression$infixToPrefix = function (exp) {
-	return A3(
-		_dgendill$calculator_in_elm_lang$Expression$infixToPrefix_,
+var _dgendill$calculator_in_elm_lang$Expression$infixToPostfix = function (exp) {
+	var _p14 = A2(
+		_dgendill$calculator_in_elm_lang$Expression$mergeNumbers,
 		exp,
-		{ctor: '[]'},
 		{ctor: '[]'});
+	if (_p14.ctor === 'Ok') {
+		return A3(
+			_dgendill$calculator_in_elm_lang$Expression$infixToPostfix_,
+			_p14._0,
+			{ctor: '[]'},
+			{ctor: '[]'});
+	} else {
+		return {ctor: '[]'};
+	}
+};
+var _dgendill$calculator_in_elm_lang$Expression$evalInfix = function (exp) {
+	var _p15 = A2(
+		_dgendill$calculator_in_elm_lang$Expression$mergeNumbers,
+		exp,
+		{ctor: '[]'});
+	if (_p15.ctor === 'Ok') {
+		var _p16 = A2(
+			_dgendill$calculator_in_elm_lang$Expression$eval_,
+			_dgendill$calculator_in_elm_lang$Expression$infixToPostfix(_p15._0),
+			{ctor: '[]'});
+		if (_p16.ctor === 'Nothing') {
+			return {ctor: '[]'};
+		} else {
+			return {
+				ctor: '::',
+				_0: _p16._0,
+				_1: {ctor: '[]'}
+			};
+		}
+	} else {
+		return {ctor: '[]'};
+	}
 };
 var _dgendill$calculator_in_elm_lang$Expression$Div = {ctor: 'Div'};
 var _dgendill$calculator_in_elm_lang$Expression$Mult = {ctor: 'Mult'};
@@ -14645,8 +14749,8 @@ var _dgendill$calculator_in_elm_lang$Calculator$update = F2(
 				};
 			default:
 				return {
-					expr: _dgendill$calculator_in_elm_lang$Expression$eval(
-						_dgendill$calculator_in_elm_lang$Expression$infixToPrefix(model.expr))
+					expr: _dgendill$calculator_in_elm_lang$Expression$evalInfix(
+						_elm_lang$core$List$reverse(model.expr))
 				};
 		}
 	});

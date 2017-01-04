@@ -8,7 +8,7 @@ import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (onClick)
 import Css as C exposing (pct, px, rgb, rgba, Mixin, width)
-import Expression exposing (Symbol(..), infixToPrefix, showExpr, eval)
+import Expression exposing (Symbol(..), evalInfix, showExpr)
 
 type alias Expression = List Symbol
 
@@ -83,7 +83,7 @@ update msg model =
       { expr = [] }
 
     MEvaluate ->
-      { expr = eval (infixToPrefix model.expr) }
+      { expr = evalInfix (List.reverse model.expr) }
 
 
 {-| Render the expression with infix notation. -}
